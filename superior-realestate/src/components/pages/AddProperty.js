@@ -91,7 +91,7 @@ const prevPhotoClick = () =>{
   return(
   <div className='page'>
   <div className='picture-col'>
-    <div className ='picture-row'>
+    <div className ='picture-row center'>
      <img className = 'picture-box' src={photo.imageLocation} alt = {"photo.imageLocation"} />
     </div>
         <div className = 'buttons-row'>
@@ -107,15 +107,15 @@ const prevPhotoClick = () =>{
     </div>
     <div className='content-row right'>
     Bedrooms
-      <input className = 'input-container center'  value={newProperty.bedrooms} name='bedrooms' type='bedrooms' onChange={addPropertyChangeHandler} ></input>
+      <input className = 'input-container center'  value={newProperty.bedrooms} name='bedrooms' type="number" onChange={addPropertyChangeHandler} ></input>
     </div>
     <div className='content-row right'>
     Bathrooms
-      <input className = 'input-container center'  value={newProperty.bathrooms} name='bathrooms' type='bathrooms' onChange={addPropertyChangeHandler} ></input>
+      <input className = 'input-container center'  value={newProperty.bathrooms} name='bathrooms' type="number" step={0.5} onChange={addPropertyChangeHandler} ></input>
     </div>
     <div className='content-row right'>
     Acres
-      <input className = 'input-container center'  value={newProperty.acres} name='acres' type='acres' onChange={addPropertyChangeHandler} ></input>
+      <input className = 'input-container center'  value={newProperty.acres} name='acres' type="number" step={0.01} onChange={addPropertyChangeHandler} ></input>
     </div>
     <div className='content-row right'>
     Address
@@ -131,23 +131,23 @@ const prevPhotoClick = () =>{
     </div>
     <div className='content-row right'>
     Zip
-      <input className = 'input-container center'  value={newProperty.zip} name='zip' type='Integer' onChange={addPropertyChangeHandler} ></input>
+      <input className = 'input-container center'  value={newProperty.zip} name='zip' type="number" onChange={addPropertyChangeHandler} ></input>
     </div>
 
     <div className='content-row right'>
     Price
-      <input className = 'input-container center' value={newProperty.price} name='price' type='price' onChange={addPropertyChangeHandler} ></input>
+      <input className = 'input-container center' value={newProperty.price} name='price' type="number" step={0.01} onChange={addPropertyChangeHandler} ></input>
     </div>
     <div className='content-row right'>
     ENTER: DATE ADDED: EX: 2023-12-03
-      <input className = 'input-container center' value={newProperty.listDate} name='listDate' type='listDate' onChange={addPropertyChangeHandler} ></input>
+      <input className = 'input-container center' value={newProperty.listDate} name='listDate' type="date" onChange={addPropertyChangeHandler} ></input>
     </div>
     <div className='buttons-row center'>
       <button className='button center' onClick={handleAddPropertySubmit}>SUBMIT</button>
     </div>
     <div className='content-row right'>
     <div classname='flex-row'>Photo URL</div>
-        <input className = 'input-container center' value={photo.imageLocation} name='imageLocation' type='imageLocation' onChange={photoChangeHandler}></input>
+        <input className = 'input-container center' value={photo.imageLocation} name='imageLocation' type="url" onChange={photoChangeHandler}></input>
       </div>
       <div className='buttons-row center'>
         <button className='button center' onClick={addPhotoClick}>Add Photo</button>

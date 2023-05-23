@@ -1,13 +1,13 @@
 .picture-row{
     height:85%;
-    width:99%;
+    width:90%;
     align-content: center;
     text-align: center;
     align-items: center;
     display:flex;
     background-color: navy;
     border: solid grey;
-    border-width: 8px;
+    border-width: 4px;
 
 }
 

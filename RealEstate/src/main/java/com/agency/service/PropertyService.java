@@ -33,7 +33,7 @@ public class PropertyService {
 	        return propertyRepo.save(property);
         }
 
-        throw new AccountNotFoundException("Account does not exist! id not present");
+        throw new AccountNotFoundException("Property does not exist! id not present");
 	}
     
 	//FIND BY ID
@@ -71,7 +71,7 @@ public class PropertyService {
     	}
     
     //ALL PROPERTIES IN A PRICE RANGE
-    public List<Property> findByPrice(double fromPrice, double toPrice) throws Error {
+    public List<Property> findByPrice(Double fromPrice, Double toPrice) throws Error {
       
    		if(!propertyRepo.findByPrice(fromPrice,toPrice).isEmpty()) {
    			return propertyRepo.findByPrice(fromPrice,toPrice);

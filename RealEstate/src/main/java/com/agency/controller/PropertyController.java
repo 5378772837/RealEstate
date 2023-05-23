@@ -118,9 +118,10 @@ public class PropertyController {
           method = RequestMethod.POST
       )
       public ResponseEntity<Object> updateProperty (@RequestBody Property property) {
+	  System.out.println(property);
 
           try {
-             
+        	  propertyService.update(property);
               return new ResponseEntity<Object>(property, HttpStatus.OK);
           } catch (Exception e) {
               System.out.println(e);
@@ -161,9 +162,8 @@ public class PropertyController {
       method = RequestMethod.GET
   )
   public ResponseEntity<Object> findPropertyByCity(@PathVariable String city) {
-
       try {
-          List <Property> foundProperty = propertyService.findByCity(city);
+          List <Property> foundProperty = propertyService.findByCity("%"+city+"%");
           return new ResponseEntity<Object>(foundProperty, HttpStatus.OK);
       } catch (Exception e) {
           System.out.println(e);
@@ -183,7 +183,7 @@ public class PropertyController {
 	  public ResponseEntity<Object> findPropertyByState(@PathVariable String state) {
 
 	      try {
-	          List <Property> foundProperty = propertyService.findByState(state);
+	          List <Property> foundProperty = propertyService.findByState("%"+state+"%");
 	          return new ResponseEntity<Object>(foundProperty, HttpStatus.OK);
 	      } catch (Exception e) {
 	          System.out.println(e);
@@ -197,6 +197,7 @@ public class PropertyController {
 
   @RequestMapping(
       value="/findAll",
+      produces = MediaType.APPLICATION_JSON_VALUE,
       method = RequestMethod.GET
   )
   public ResponseEntity<Object> findAll() {
@@ -216,6 +217,7 @@ public class PropertyController {
   
   @RequestMapping(
 	      value="/findPropertiesInInventory",
+	      produces = MediaType.APPLICATION_JSON_VALUE,
 	      method = RequestMethod.GET
 	  )
 	  public ResponseEntity<Object> findPropertiesInInventory() {
@@ -251,6 +253,26 @@ public class PropertyController {
       }
 
   }
+  
+  @RequestMapping(
+	      value="/findByPrice/{fromPrice}/{toPrice}",
+	      produces = MediaType.APPLICATION_JSON_VALUE,
+	      method = RequestMethod.GET
+	  )
+	  public ResponseEntity<Object> findPropertiesByPrice(@PathVariable Double fromPrice, @PathVariable Double toPrice) {
+			
+	      try {
+	          List<Property> propertiesInRange = propertyService.findByPrice(fromPrice, toPrice);
+	          return new ResponseEntity<Object>(propertiesInRange, HttpStatus.OK);
+	      } catch (Exception e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	      } catch (Error e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+	      }
+
+	  }
 
 	
 	

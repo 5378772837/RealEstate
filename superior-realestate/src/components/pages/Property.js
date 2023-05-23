@@ -61,7 +61,7 @@ function Property(props) {
 <div className='page'>
   <div className='picture-col'>
     <div className ='picture-row center'>
-     <img className = 'picture-box' src={photo.imageLocation} alt = {"photo.imageLocation"} />
+     <img className = 'picture-box center' src={photo.imageLocation} alt = {"photo.imageLocation"} />
     </div>
         <div className = 'buttons-row'>
           <button className='button center'onClick={nextPhotoClick}>NEXT</button>

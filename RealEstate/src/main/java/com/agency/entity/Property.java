@@ -124,10 +124,6 @@ public class Property{
 		this.dateSold = dateSold;
 	}
 
-	public void setDiscount(double discount) {
-		this.discount = discount;
-	}
-
 	public void setPropertyPhotos(List<Photo> propertyPhotos) {
 		this.propertyPhotos = propertyPhotos;
 	}
@@ -176,8 +172,11 @@ public class Property{
 		this.price = price;
 	}
 	
+	public LocalDate getListDate(){
+		return listDate;
+	}
 	public void setListDate(LocalDate date) throws ParseException{
-		
+	this.listDate=date;	
 	}
 	public boolean isSold() {
 		return isSold;
@@ -198,9 +197,6 @@ public class Property{
 		this.propertyPhotos.remove(photo);
 	}
 
-	public LocalDate getListDate(){
-		return listDate;
-	}
 	public void setDiscount() {
 		LocalDate today = LocalDate.now();
 		long diff = ChronoUnit.DAYS.between(this.getListDate(), today);
@@ -209,4 +205,14 @@ public class Property{
 	public double getDiscount() {
 		return this.discount;
 	}
+
+	@Override
+	public String toString() {
+		return "Property [id=" + id + ", description=" + description + ", bedrooms=" + bedrooms + ", bathrooms="
+				+ bathrooms + ", acres=" + acres + ", stAddress=" + stAddress + ", city=" + city + ", state=" + state
+				+ ", zip=" + zip + ", price=" + price + ", isSold=" + isSold + ", salePrice=" + salePrice
+				+ ", listDate=" + listDate + ", dateSold=" + dateSold + ", discount=" + discount + ", propertyPhotos="
+				+ propertyPhotos + "]";
+	}
+	
 }

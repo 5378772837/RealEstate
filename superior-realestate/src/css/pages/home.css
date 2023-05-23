@@ -18,11 +18,22 @@
     justify-content: center;
     align-items: center;
     color:navy;
-    border:solid black ;
+    border:solid navy ;
     background-color: white;
     margin: auto;
-
     height: 30%;
+    width: 50%;
+    border-radius: 30px;
+    
+}
+.message-col{
+    display:flex;
+    flex-direction: column;
+    height:15%;
     width: 100%;
-
+}
+.body-row{
+    display:flex;
+    height:85%;
+    width: 100%;
 }
