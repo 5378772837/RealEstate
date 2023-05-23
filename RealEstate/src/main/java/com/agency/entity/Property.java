@@ -36,6 +36,9 @@ public class Property{
 	@Column(name="bathrooms")
 	private Integer bathrooms;
 	
+	@Column(name="sq_foot")
+	private Integer sqFoot;
+	
 	@Column(name="acres")
 	private Double acres;
 	
@@ -55,7 +58,7 @@ public class Property{
 	private Double price;
 	
 	@Column(name = "is_sold")
-	private Boolean isSold;
+	private Boolean isSold=false;
 	
 	@Column(name = "sale_price")
 	private Double salePrice=0.00;
@@ -205,14 +208,25 @@ public class Property{
 	public double getDiscount() {
 		return this.discount;
 	}
+	
+	public Integer getSqFoot() {
+		return sqFoot;
+	}
+
+	public void setSqFoot(Integer sqFoot) {
+		this.sqFoot = sqFoot;
+	}
 
 	@Override
 	public String toString() {
 		return "Property [id=" + id + ", description=" + description + ", bedrooms=" + bedrooms + ", bathrooms="
-				+ bathrooms + ", acres=" + acres + ", stAddress=" + stAddress + ", city=" + city + ", state=" + state
-				+ ", zip=" + zip + ", price=" + price + ", isSold=" + isSold + ", salePrice=" + salePrice
-				+ ", listDate=" + listDate + ", dateSold=" + dateSold + ", discount=" + discount + ", propertyPhotos="
-				+ propertyPhotos + "]";
+				+ bathrooms + ", sqFoot=" + sqFoot + ", acres=" + acres + ", stAddress=" + stAddress + ", city=" + city
+				+ ", state=" + state + ", zip=" + zip + ", price=" + price + ", isSold=" + isSold + ", salePrice="
+				+ salePrice + ", listDate=" + listDate + ", dateSold=" + dateSold + ", discount=" + discount
+				+ ", propertyPhotos=" + propertyPhotos + "]";
 	}
+
+
+
 	
 }

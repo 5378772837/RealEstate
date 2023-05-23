@@ -151,6 +151,10 @@ function EditProperty(props) {
       <input className = 'input-container center'  value={editProperty.acres} name='acres' type="number" step={0.01} onChange={changeHandler} ></input>
     </div>
     <div className='content-row right'>
+    Square Ft
+      <input className = 'input-container center'  value={editProperty.sqFoot} name='sqFoot' type="number" step={0.5} onChange={changeHandler} ></input>
+    </div>
+    <div className='content-row right'>
     Address
       <input className = 'input-container center'  value={editProperty.stAddress} name='stAddress' type='stAddress' onChange={changeHandler} ></input>
     </div>

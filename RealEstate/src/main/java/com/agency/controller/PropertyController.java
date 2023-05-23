@@ -1,5 +1,6 @@
 package com.agency.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -132,6 +133,26 @@ public class PropertyController {
           }
 
       }
+  @RequestMapping(
+          value="/Purchase/{email}",
+          consumes = MediaType.APPLICATION_JSON_VALUE,
+          produces = MediaType.APPLICATION_JSON_VALUE,
+          method = RequestMethod.POST
+      )
+  	public ResponseEntity<Object> purchaseProperty(@RequestBody Property property, @PathVariable String email) {
+    
+	  try {
+        userService.addPropertyToUser(property,email);
+        return new ResponseEntity<Object>(property, HttpStatus.OK);
+    } catch (Exception e) {
+        System.out.println(e);
+        return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    } catch (Error e) {
+        System.out.println(e);
+        return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+}
 
   
   @RequestMapping(
@@ -263,6 +284,25 @@ public class PropertyController {
 			
 	      try {
 	          List<Property> propertiesInRange = propertyService.findByPrice(fromPrice, toPrice);
+	          return new ResponseEntity<Object>(propertiesInRange, HttpStatus.OK);
+	      } catch (Exception e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	      } catch (Error e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+	      }
+
+	  }
+  @RequestMapping(
+	      value="/findBySqFt/{fromSqFt}/{toSqFt}",
+	      produces = MediaType.APPLICATION_JSON_VALUE,
+	      method = RequestMethod.GET
+	  )
+	  public ResponseEntity<Object> findPropertiesBySqFt(@PathVariable Double fromSqFt, @PathVariable Double toSqFt) {
+			
+	      try {
+	          List<Property> propertiesInRange = propertyService.findByPrice(fromSqFt, toSqFt);
 	          return new ResponseEntity<Object>(propertiesInRange, HttpStatus.OK);
 	      } catch (Exception e) {
 	          System.out.println(e);

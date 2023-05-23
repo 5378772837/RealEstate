@@ -37,6 +37,14 @@ width:100%;
 
 }
 
+.scroll{
+  scrollbar-gutter:stable;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+  overflow: none;
+
+}
+
 @import url('./css/reusables/dimensions.css');
 @import url('./css/reusables/flex.css');
 @import url('./css/reusables/positions.css');

@@ -10,20 +10,18 @@ function Property(props) {
   const location = useLocation();
   const { property } = location.state;
   const[photo, setPhoto]=useState({id:0,imageLocation:"https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/08/real-estate-logo-design.jpg"});
-  const [selectedProperty, setSelectedProperty] = useState(0);
+  const [selectedProperty, setSelectedProperty] = useState([]);
   let [photoNum, setPhotoNum] = useState(0);
   let [photoCount,setPhotoCount] = useState(0);
   const navigate = useNavigate();
+  const [displayMessage, setDisplayMessage] = useState("This House is Still For Sale!");
 
   useEffect(() => {
+  console.log(property)
   setSelectedProperty(property);
   setPhotoCount(Object.keys(property.propertyPhotos).length)
   displayPhoto()
   }, [])
-
-  useEffect(()=>{
-  displayPhoto()
-  },[photoCount])
 
   const displayPhoto = () => {
     try{
@@ -54,7 +52,23 @@ function Property(props) {
       }
 
     }
-
+const handleBuySubmit = () =>{
+  console.log(props.user.email)
+  console.log(selectedProperty.isSold)
+  if(props.user.email !== undefined && selectedProperty.isSold===false){
+    axios.post(`http://localhost:8080/property/Purchase/${selectedProperty.id}/${props.user.email}`)
+    .then((response)=>{
+      setPhotoNum(0)
+      setSelectedProperty(response.data)
+      setDisplayMessage("CONGRATS ON YOUR NEW HOME")
+  
+    }).catch((e)=>{
+      console.log(e)
+    })
+  }else{
+    setDisplayMessage("You MUST be Logged In to Purchase A Home")
+  }
+}
   
 
   return (
@@ -79,6 +93,9 @@ function Property(props) {
     <b>Bathrooms: &nbsp;</b>{selectedProperty.bathrooms}
     </div>
     <div className='content-row center'>
+    <b>Square Ft: &nbsp; </b> {selectedProperty.sqFoot}
+    </div>
+    <div className='content-row center'>
     <b>Acres: &nbsp;</b>{selectedProperty.acres}
     </div>
     <div className='content-row center'>
@@ -100,8 +117,11 @@ function Property(props) {
     <div className='content-row center'>
     <b>DATE ADDED: &nbsp;</b>{selectedProperty.listDate}
     </div>
-    <div>
-   
+    <div className='content-row center'>
+    <h3>{displayMessage} &nbsp;</h3>
+    </div>
+    <div className='content-row center'>
+    <button className="button center" onClick={handleBuySubmit}>PURCHASE PROPERTY</button>
         </div>
         </div>
         </div>

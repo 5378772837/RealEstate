@@ -93,8 +93,15 @@ const addPropertiesSubmitHandler=() =>{
             key={property.id}
             onClick={() => handlePropertyClick(property)}
           >
-            Click To Edit Property
-            <img src={propertyPhoto} alt={property.desc} />
+            Click To Edit:
+          <div className='flex-row center'>{property.description}</div>
+          <div className='flex-row center'>
+          <img src={propertyPhoto} alt={property.description} />
+          </div>
+          <div className='flex-row center'>Beds:&nbsp;{property.bedrooms}&nbsp;Baths:&nbsp;{property.bathrooms}sqFt:{property.sqFoot}</div>
+          <div className='flex-row center'>{property.stAddress}</div>
+          <div className='flex-row center'>{property.city}, &nbsp; {property.state} &nbsp; {property.zip}</div>
+          <div className='flex-row center'>${property.price}</div>
           </div>
         );
       });
@@ -105,23 +112,23 @@ const addPropertiesSubmitHandler=() =>{
     return (
             <div className= 'fill'>
             <div className='admin-sidebar justify-content-center'>
-                    <h2>Hello Agent</h2>
-                    <h1>Run Sales Report</h1>
+                    <h3>Hello Agent</h3>
+                    <h2>Run Sales Report</h2>
                     Report Start Date
                     <input className='sidebar-input-container'  value={reportDates.startDate} name='startDate' type='startDate' onChange={changeHandler} required></input>
                     Report End Date
                     <input className='sidebar-input-container' value={reportDates.endDate} name='endDate' type='endDate' onChange={changeHandler} required></input>
-                    <button onClick={reportSubmitHandler}>GET REPORT</button>
-                    <h1>EDIT PROPERTY</h1>
-                    <h2>FIND ALL</h2>
-                    <button onClick={findAllSubmitHandler}>FIND ALL PROPERTIES</button>
-                    <h1>ADD PROPERTY</h1>
-                    <button onClick={addPropertiesSubmitHandler}>ADD NEW PROPERTY</button>
+                    <button className="button" onClick={reportSubmitHandler}>GET REPORT</button>
+                    <h2>EDIT PROPERTY</h2>
+                    <h3>FIND ALL</h3>
+                    <button className="button" onClick={findAllSubmitHandler}>FIND ALL PROPERTIES</button>
+                    <h2>ADD PROPERTY</h2>
+                    <button className="button" onClick={addPropertiesSubmitHandler}>ADD NEW PROPERTY</button>
                     <h2>FIND BY CITY</h2>
                     <input className='sidebar-input-container'  value={search} name='model' type='model' onChange={handleSearchChange} required></input>
-                    <button onClick={handleSearchSubmit}>FIND BY CITY</button>
+                    <button className="button" onClick={handleSearchSubmit}>FIND BY CITY</button>
             </div>
-            <div className = 'property-disp-col fill'>
+            <div className = 'property-disp-col scroll'>
                 {showProperties()}
                 
                       </div>

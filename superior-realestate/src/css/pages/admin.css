@@ -8,7 +8,8 @@
 .admin-sidebar{
 display: flex;
 flex-direction: column;
-width: 30%;
+width: 30vw;
+min-width: 300px;
 height: auto;
 justify-content:left;
 align-items:center;
@@ -18,9 +19,10 @@ border:solid silver
 }
 
 .propery-disp-col{
-    display:flex;
+    display: flex;
     flex-direction: column;
     width: 70%;
+    scroll-behavior: smooth;
 
 }
 .property-disp-box {
@@ -37,9 +39,12 @@ border:solid silver
 .sidebar-input-container{
     flex-direction: column;
     justify-content: center;
-    border: solid black;
+    border: solid silver;
     height:30px;
     width: 200px;
+    border-radius: 5px;
+
+
 }
 
 .fill{
@@ -68,7 +73,7 @@ border:solid silver
 .input-container{
     flex-direction: row;
     justify-content: center;
-    border: solid black;
+    border: solid silver;
     margin-top: 10px;
     height:30px;
     width: 300px;

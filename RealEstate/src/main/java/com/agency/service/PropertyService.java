@@ -81,6 +81,18 @@ public class PropertyService {
         
     	}
     
+  //ALL PROPERTIES IN A BY SQUARE FT
+    public List<Property> findBySqFt(Double fromSqFt, Double toSqFt) throws Error {
+      
+   		if(!propertyRepo.findByPrice(fromSqFt,toSqFt).isEmpty()) {
+   			return propertyRepo.findByPrice(fromSqFt,toSqFt);
+   		}
+        
+   		throw new Error("No properties listed in that square foot range");
+        
+    	}
+    
+    
     //A LIST OF ALL PROPERTIES
 	public List<Property> findAll() {
 		List<Property> properties = propertyRepo.findAll();

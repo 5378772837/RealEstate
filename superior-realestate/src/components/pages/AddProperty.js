@@ -56,7 +56,7 @@ const photoChangeHandler = (event) => {
 
 }
 const deletePhotoClick = () =>{
-  axios.delete(`http://localhost:8080/car/deletePhoto/${newProperty.id}/${photo.id}`)
+  axios.delete(`http://localhost:8080/property/deletePhoto/${newProperty.id}/${photo.id}`)
   .then((response)=>{
     setPhotoNum(0)
 
@@ -112,6 +112,10 @@ const prevPhotoClick = () =>{
     <div className='content-row right'>
     Bathrooms
       <input className = 'input-container center'  value={newProperty.bathrooms} name='bathrooms' type="number" step={0.5} onChange={addPropertyChangeHandler} ></input>
+    </div>
+    <div className='content-row right'>
+    Square Ft
+    <input className = 'input-container center'  value={newProperty.sqFoot} name='sqFoot' type="number" step={0.5} onChange={addPropertyChangeHandler} ></input>
     </div>
     <div className='content-row right'>
     Acres

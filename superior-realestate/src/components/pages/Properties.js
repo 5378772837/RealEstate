@@ -8,7 +8,7 @@ function Properties (props) {
   const [selectedProperty, setSelectedProperty] = useState();
   const [properties, setProperties] = useState([]);
   const navigate = useNavigate();
-  const [search, setSearch] = useState({city:"",state:"",beginningPrice:0.00,endingPrice:0.00});
+  const [search, setSearch] = useState({city:"",state:"",sqFootStart:'',sqFootEnd:'',beginningPrice:'',endingPrice:''});
 
   useEffect(() => {
 
@@ -72,6 +72,18 @@ function Properties (props) {
         console.log(error);
       });
   };
+  const handleSqFtSearchSubmit = (event) => {
+    event.preventDefault();
+  
+    axios
+      .get(`http://localhost:8080/property/findBySqFt/${search.sqFootStart}/${search.sqFootEnd}`)
+      .then((response) => {
+        setProperties(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handlePropertyClick = (property) => {
     navigate('/Property', { state: {property} });
@@ -88,21 +100,14 @@ function Properties (props) {
           key={property.id}
           onClick={() => handlePropertyClick(property)}
         >
+          <div className='flex-row center'>{property.description}</div>
           <div className='flex-row center'>
           <img src={propertyPhoto} alt={property.description} />
           </div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
-          <div className='flex-row center'>{property.address}</div>
+          <div className='flex-row center'>Beds:&nbsp;{property.bedrooms}&nbsp;Baths:&nbsp;{property.bathrooms}</div>
+          <div className='flex-row center'>{property.stAddress}</div>
+          <div className='flex-row center'>{property.city}, &nbsp; {property.state} &nbsp; {property.zip}</div>
+          <div className='flex-row center'>${property.price}</div>
 
         </div>
       );
@@ -111,14 +116,17 @@ function Properties (props) {
 
 
   return (
-    <div className='buy-content'>
+    <div className='buy-content scroll'>
       <div className='flex-row search-row'>
         <input className='search-container center' type="city" value={search.city} name='city' onChange={handleSearchChange} placeholder='Search by City'/>
         <button className = 'search-button center' onClick={handleCitySearchSubmit}>Search</button>
         <input className='search-container center' type="state" value={search.state} name='state'onChange={handleSearchChange} placeholder='Search by State'/>
         <button className = 'search-button center' onClick={handleStateSearchSubmit}>Search</button>
-        <input className='search-container center' type="Double" value={search.beginningPrice} name='beginningPrice'onChange={handleSearchChange} placeholder='Starting Price'/>
-        <input className='search-container center' type="Double" value={search.endingPrice} name='endingPrice' onChange={handleSearchChange} placeholder='Ending Price'/>
+        <input className='search-container center' type="number" step={0.5} value={search.sqFootStart} name='sqFootStart'onChange={handleSearchChange} placeholder='Square Foot Start'/>
+        <input className='search-container center' type="number" step={0.5} value={search.sqFootEnd} name='sqFootEnd' onChange={handleSearchChange} placeholder='Square Foot End'/>
+        <button className = 'search-button center' onClick={handleSqFtSearchSubmit}>Search</button>
+        <input className='search-container center' type="number" step={0.5} value={search.beginningPrice} name='beginningPrice'onChange={handleSearchChange} placeholder='Starting Price'/>
+        <input className='search-container center' type="number" step={0.5} value={search.endingPrice} name='endingPrice' onChange={handleSearchChange} placeholder='Ending Price'/>
         <button className = 'search-button center' onClick={handlePriceSearchSubmit}>Search</button>
       </div>
       {showProperties()}

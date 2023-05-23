@@ -1,5 +1,6 @@
 package com.agency.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,23 +70,26 @@ public class UserService {
 	    userRepo.deleteById(id);
 	}
 
-	public User addPropertyToUser(Property property,String email) {
+	public Property addPropertyToUser(Property property,String email) {
 		
 		property.setSold(true);
+		property.setDateSold(LocalDate.now());
 		propertyRepo.save(property);
 		User user = userRepo.findByEmail(email);
 		user.addProperty(property);
-		return userRepo.save(user);
+		userRepo.save(user);
+		return property;
 
 	}
 	
-	public User addListingToUser(String email, Property listing) {
+	public Property addListingToUser(String email, Property listing) {
 		
 		listing.setSold(false);
 		propertyRepo.save(listing);
 		User user = userRepo.findByEmail(email);
 		user.addListing(listing);
-		return userRepo.save(user);
+		userRepo.save(user);
+		return listing;
 
 	}
 
