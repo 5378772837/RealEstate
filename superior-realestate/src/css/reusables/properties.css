@@ -1,0 +1,30 @@
+.property-box {
+    border: 2px solid lightblue;
+    color: whitesmoke;
+    border-radius: 8px;
+    height: 60%;
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+}
+
+.third-width {
+    width: 33%;
+  }
+
+.property-img {
+    height: 150px;
+    width: 130px;
+    margin: 10px;
+}
+
+.property-container {
+    height: 100%;
+    min-height: 400px;
+    width: 95%;
+    border: 3px solid white;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    overflow: scroll;
+    justify-content: center;
+}

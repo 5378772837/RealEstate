@@ -1,0 +1,11 @@
+
+.third-width {
+    width: 33%;
+  }
+
+body {
+    background-color: navy;
+    color: white;
+    text-align:center;
+    justify-content: center;
+   }

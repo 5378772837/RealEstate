@@ -1,0 +1,175 @@
+.picture-row{
+    height:85%;
+    width:99%;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    display:flex;
+    background-color: navy;
+    border: solid grey;
+    border-width: 8px;
+
+}
+
+.buttons-row{
+    height:15%;
+    text-align: center;
+    align-items: center;
+    display:flex;
+
+}
+
+.content-row{
+    height:5vh;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    margin: 3px
+
+}
+
+.desc-row{
+    height:20vh;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    margin: 3px
+    
+}
+
+.input-container{
+    flex-direction: row;
+    justify-content: center;
+    border: solid silver;
+    height:20px;
+    width: 350px;
+    margin: 5px;
+    border-radius: 5px;
+
+    
+}
+
+
+.search-container{
+    flex-direction: row;
+    justify-content: center;
+    border: solid silver;
+    height:20px;
+    width: 250px;
+    margin: 5px;
+    border-radius: 5px;
+
+    
+}
+
+.desc-input-container{
+    flex-direction: row;
+    justify-content: center;
+    border: solid silver;
+    height:80px;
+    width: 350px;
+    margin: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    font-style: italic;
+    
+}
+
+.picture-col{
+    width:70%;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    
+}
+.data-col{
+    width:30%;
+    height:90vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    color: whitesmoke;
+    background-color:  navy;
+    border-color: solid azure;
+    border-width: 5px;
+    
+}
+.button {
+    
+    background-color: whitesmoke;
+    border:  1 solid darkslategray;
+    color: navy;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 700;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    text-decoration: none #000000 solid;
+    text-decoration-thickness: auto;
+    width: auto;
+    position: relative;
+    margin: 3px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    height: 40px;
+    width: 200px;
+    border-radius: 5px;
+}
+
+
+.button:hover {
+    bottom: 2px;
+    left: 2px;
+    color:blue;
+    background-color: lightblue;
+}
+
+.search-button {
+    
+    background-color: whitesmoke;
+    border:  1 solid darkslategray;
+    color: navy;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 700;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    text-decoration: none #000000 solid;
+    text-decoration-thickness: auto;
+    width: auto;
+    position: relative;
+    margin: 3px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+}
+
+
+.search-button:hover {
+    bottom: 2px;
+    left: 2px;
+    color:blue;
+    background-color: lightblue;
+}
+.picture-box{
+    border-color: black;
+    height: 700;
+    width:auto;
+    border:8px;
+    border-radius: 10px;
+}

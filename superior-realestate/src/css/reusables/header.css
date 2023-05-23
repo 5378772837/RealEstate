@@ -1,0 +1,46 @@
+.cart-icon {
+    height: 50px;
+    width: 50px;
+}
+
+
+
+.header-link {
+    margin: center;
+    cursor: pointer;
+    color: navy;
+    text-decoration: none;
+    padding: 50px ;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+
+.logo {
+    height: 100px;
+
+}
+
+.cart-items-count {
+    background-color:blue;
+    color: white;
+    font-size: 12px;
+    font-weight: 900;
+    border-radius: 50px;
+    height: 20px;
+    width: 20px;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    margin-left: 35px;
+}
+.center{
+    justify-content: center;
+    align-items: center;
+    display:flex
+}
+
+.third-width {
+    width: 33%;
+  }

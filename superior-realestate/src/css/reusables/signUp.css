@@ -1,0 +1,41 @@
+.sign-up-box {
+    border: 2px solid white;
+    border-radius: 8px;
+    height: 50%;
+    min-height: 450px;
+    width: 40%;
+    justify-content: center;
+    vertical-align: middle;
+    margin-top: 40px;
+    margin:auto;
+    padding: 25px;
+    text-align: center;
+}
+
+.h1 {
+    justify-content: center;
+}
+
+.third-width {
+    width: 33%;
+}
+
+.form-input {
+    margin-left: 20px;
+    height: 30px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid;
+    justify-content: center;
+}
+
+.form-input:focus {
+    outline: none;
+}
+
+.form-input-container {
+    margin: 50px auto;
+    align-items: center;
+    justify-content: center;
+}
+

@@ -1,0 +1,21 @@
+.center{
+    justify-content: center;
+    align-items: center;
+}
+.right{
+    justify-content: right;
+    align-items: right;
+}
+.left {
+    justify-content: left;
+    align-items: left;
+}
+.bottom{
+    align-items: baseline;
+}
+.margin-center{
+    margin: auto;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
