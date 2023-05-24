@@ -43,7 +43,11 @@ function EditProperty(props) {
 
   const changeHandler = (event) => {
     const name = event.target.name;
-    const value = event.target.value;
+    let value;
+    if (event.target.type === "checkbox") {
+        value = event.target.checked;
+
+    } else {value = event.target.value;}
     const tempProperty = { ...property};
     tempProperty[name] = value;
     setEditProperty(tempProperty)
@@ -174,6 +178,10 @@ function EditProperty(props) {
     <div className='content-row right'>
     Price
       <input className = 'input-container center' value={editProperty.price} name='price' type="number" step={0.01} onChange={changeHandler} ></input>
+    </div>
+    <div className='content-row right'>
+    Sold
+      <input className = 'input-container center' value={editProperty.isSold} name='isSold' type="checkbox" onChange={changeHandler} ></input>
     </div>
     <div className='content-row right'>
     ENTER: DATE ADDED: EX: 2023-12-03

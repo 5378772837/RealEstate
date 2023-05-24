@@ -84,8 +84,8 @@ public class PropertyService {
   //ALL PROPERTIES IN A BY SQUARE FT
     public List<Property> findBySqFt(Double fromSqFt, Double toSqFt) throws Error {
       
-   		if(!propertyRepo.findByPrice(fromSqFt,toSqFt).isEmpty()) {
-   			return propertyRepo.findByPrice(fromSqFt,toSqFt);
+   		if(!propertyRepo.findBySqFt(fromSqFt,toSqFt).isEmpty()) {
+   			return propertyRepo.findBySqFt(fromSqFt,toSqFt);
    		}
         
    		throw new Error("No properties listed in that square foot range");
@@ -108,8 +108,15 @@ public class PropertyService {
 		List<Property> properties = propertyRepo.findPropertiesInInvetory();
 		for(Property p: properties) {
 			p.setDiscount();
+			propertyRepo.save(p);
 			p.getDiscount();
 			}
+		return properties;
+
+	}
+	public List<Property> findAgentProperties(Integer id) {
+		
+		List<Property> properties = propertyRepo.findAgentProperties(id);
 		return properties;
 
 	}

@@ -2,19 +2,18 @@ import React, { useState } from 'react'
 import '../../css/pages/SignIn.css'
 import '../../css/reusables/positions.css'
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import report from '../reusables/reportGenerator';
 import '../../css/pages/admin.css'
-import EditProperty from './EditProperty';
 
-function Admin()  {
 
+function Admin(props)  {
+  console.log("Admin Page")
+  console.log(props.user)
   const [reportDates, setReportDates] = useState({startDate: '', endDate: '' });
-  const [propertySales, setPropertySales] = useState([]);
   const [properties, setProperties]=useState([]);
   const [search, setSearch]=useState([]);
-  const [editProperty, setEditProperty] = useState(null);
 
   const navigator = useNavigate()
 
@@ -51,10 +50,11 @@ const addPropertiesSubmitHandler=() =>{
 }
 
 
-    const findAllSubmitHandler=() => {
+    const findAgentProperties=() => {
+      console.log(props.user)
 
       try {
-        axios.get('http://localhost:8080/property/findPropertiesInInventory')
+        axios.get(`http://localhost:8080/property/findAgentProperties/${props.user.id}`)
         .then((response) => {
           console.log("response data", response.data)
           setProperties(response.data);}
@@ -121,7 +121,7 @@ const addPropertiesSubmitHandler=() =>{
                     <button className="button" onClick={reportSubmitHandler}>GET REPORT</button>
                     <h2>EDIT PROPERTY</h2>
                     <h3>FIND ALL</h3>
-                    <button className="button" onClick={findAllSubmitHandler}>FIND ALL PROPERTIES</button>
+                    <button className="button" onClick={findAgentProperties}>FIND MY PROPERTIES</button>
                     <h2>ADD PROPERTY</h2>
                     <button className="button" onClick={addPropertiesSubmitHandler}>ADD NEW PROPERTY</button>
                     <h2>FIND BY CITY</h2>

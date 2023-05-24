@@ -26,7 +26,7 @@ function Header(props) {
   const renderHeader = () => {
 
 
-    if (props.user.id !== undefined&&props.user.agent===true) {
+    if (props.user.id !== undefined&&props.user.isAgent===true) {
 
     return (
         <div className='header'>
@@ -51,7 +51,7 @@ function Header(props) {
             <div className='header-link' onClick={signOut}>SIGN OUT</div>
         </div>
     )
-    }else if(props.user.id !== undefined&&props.user.agent===false){
+    }else if(props.user.id !== undefined&&props.user.isAgent===false){
         return (
             <div className='header'>
             <div>

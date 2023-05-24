@@ -21,7 +21,7 @@ function Property(props) {
   setSelectedProperty(property);
   setPhotoCount(Object.keys(property.propertyPhotos).length)
   displayPhoto()
-  }, [])
+  }, [photoCount])
 
   const displayPhoto = () => {
     try{
@@ -54,25 +54,28 @@ function Property(props) {
     }
 const handleBuySubmit = () =>{
   console.log(props.user.email)
-  console.log(selectedProperty.isSold)
-  if(props.user.email !== undefined && selectedProperty.isSold===false){
-    axios.post(`http://localhost:8080/property/Purchase/${selectedProperty.id}/${props.user.email}`)
+  if(props.user.email === ""){
+    setDisplayMessage("You MUST be Logged In to Purchase A Home")
+    }else if(selectedProperty.isSold === true || selectedProperty.sold ===true){
+    setDisplayMessage("This house is no longer for sale")
+    }else{
+    try{
+    axios.post(`http://localhost:8080/property/Purchase/${props.user.email}`,selectedProperty)
     .then((response)=>{
       setPhotoNum(0)
       setSelectedProperty(response.data)
       setDisplayMessage("CONGRATS ON YOUR NEW HOME")
-  
-    }).catch((e)=>{
+    })}catch(e){
       console.log(e)
-    })
-  }else{
-    setDisplayMessage("You MUST be Logged In to Purchase A Home")
+    }
   }
 }
+
+
   
 
   return (
-<div className='page'>
+<div className='fill'>
   <div className='picture-col'>
     <div className ='picture-row center'>
      <img className = 'picture-box center' src={photo.imageLocation} alt = {"photo.imageLocation"} />

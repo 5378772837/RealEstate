@@ -24,7 +24,7 @@ function SignIn(props) {
           .then((response) => {
             localStorage.setItem("userId", response.data.id)
             props.setUser(response.data)
-            if(props.user.isAgent = true){
+            if(props.user.isAgent=== true){
             navigator("/Admin")}else{navigator("/")}
           })
           .catch((e) => {

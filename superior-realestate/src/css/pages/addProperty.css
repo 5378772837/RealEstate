@@ -168,8 +168,8 @@
 }
 .picture-box{
     border-color: black;
-    height: 700;
-    width:auto;
+    max-height: 90%; 
+    max-width: 90%;
     border:8px;
     border-radius: 10px;
 }

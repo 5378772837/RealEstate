@@ -44,11 +44,11 @@ public class PropertyController {
           produces = MediaType.APPLICATION_JSON_VALUE,
           method = RequestMethod.POST
       )
-      public ResponseEntity<Object> addProperty(@RequestBody Property property, @PathVariable String email) {
-	  		System.out.println(email+" "+ property);
+      public ResponseEntity<Object> addProperty(@RequestBody Property listing, @PathVariable String email) {
+
           try {
-              userService.addListingToUser(email,property);
-              return new ResponseEntity<Object>(property, HttpStatus.OK);
+              userService.addListingToUser(listing,email);
+              return new ResponseEntity<Object>(listing, HttpStatus.OK);
           } catch (Exception e) {
               System.out.println(e);
               return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -244,7 +244,25 @@ public class PropertyController {
 	  public ResponseEntity<Object> findPropertiesInInventory() {
 
 	      try {
-	          List<Property> inventoryProperties = propertyService.findAll();
+	          List<Property> inventoryProperties = propertyService.findPropertiesInInventory();
+	          return new ResponseEntity<Object>(inventoryProperties, HttpStatus.OK);
+	      } catch (Exception e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	      } catch (Error e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+	      }
+
+	  }
+  @RequestMapping(
+	      value="/findAgentProperties/{id}",
+	      produces = MediaType.APPLICATION_JSON_VALUE,
+	      method = RequestMethod.GET
+	  )
+	  public ResponseEntity<Object> findAgentProperties(@PathVariable Integer id) {
+	      try {
+	          List<Property> inventoryProperties = propertyService.findAgentProperties(id);
 	          return new ResponseEntity<Object>(inventoryProperties, HttpStatus.OK);
 	      } catch (Exception e) {
 	          System.out.println(e);
@@ -302,7 +320,7 @@ public class PropertyController {
 	  public ResponseEntity<Object> findPropertiesBySqFt(@PathVariable Double fromSqFt, @PathVariable Double toSqFt) {
 			
 	      try {
-	          List<Property> propertiesInRange = propertyService.findByPrice(fromSqFt, toSqFt);
+	          List<Property> propertiesInRange = propertyService.findBySqFt(fromSqFt, toSqFt);
 	          return new ResponseEntity<Object>(propertiesInRange, HttpStatus.OK);
 	      } catch (Exception e) {
 	          System.out.println(e);

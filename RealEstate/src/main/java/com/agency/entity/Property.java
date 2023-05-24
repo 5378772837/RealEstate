@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 //Annotate Objects with Entity, lets project know its a Object from the DB
@@ -58,7 +59,7 @@ public class Property{
 	private Double price;
 	
 	@Column(name = "is_sold")
-	private Boolean isSold=false;
+	private Boolean isSold;
 	
 	@Column(name = "sale_price")
 	private Double salePrice=0.00;
@@ -76,9 +77,26 @@ public class Property{
 	@JoinColumn(name="property_Id",referencedColumnName="id")
 	private List<Photo> propertyPhotos=new ArrayList<>();
 	
+	
 	public Property(){
 	}
-	
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public void setIsSold(Boolean isSold) {
+		this.isSold = isSold;
+	}
+
+	public void setSalePrice(Double salePrice) {
+		this.salePrice = salePrice;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -181,11 +199,11 @@ public class Property{
 	public void setListDate(LocalDate date) throws ParseException{
 	this.listDate=date;	
 	}
-	public boolean isSold() {
+	public boolean getIsSold() {
 		return isSold;
 	}
 
-	public void setSold(boolean isSold) {
+	public void setIsSold(boolean isSold) {
 		this.isSold = isSold;
 	}
 

@@ -72,7 +72,7 @@ public class UserService {
 
 	public Property addPropertyToUser(Property property,String email) {
 		
-		property.setSold(true);
+		property.setIsSold(true);
 		property.setDateSold(LocalDate.now());
 		propertyRepo.save(property);
 		User user = userRepo.findByEmail(email);
@@ -82,9 +82,9 @@ public class UserService {
 
 	}
 	
-	public Property addListingToUser(String email, Property listing) {
+	public Property addListingToUser(Property listing, String email) {
 		
-		listing.setSold(false);
+		listing.setIsSold(false);
 		propertyRepo.save(listing);
 		User user = userRepo.findByEmail(email);
 		user.addListing(listing);
