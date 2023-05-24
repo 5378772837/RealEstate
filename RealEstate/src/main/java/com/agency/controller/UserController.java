@@ -43,7 +43,7 @@ public class UserController {
     )
    
     public ResponseEntity<Object> signUp(@RequestBody User user) {
-    	System.out.println("You hit sign up controller homie: "+user);
+    	System.out.println("You hit sign up controller: "+user);
         try {
             User savedUser = userService.save(user);
             System.out.println("this is your saved user "+savedUser);
@@ -65,7 +65,7 @@ public class UserController {
         method = RequestMethod.POST
     )
     public ResponseEntity<Object> signIn(@RequestBody User user) {
-    	System.out.println("You hit sign in homie: " + user);
+    	System.out.println("You hit sign in: " + user);
         try {
             User loggedInUser = userService.signIn(user);
             return new ResponseEntity<Object>(loggedInUser, HttpStatus.OK);
@@ -181,50 +181,6 @@ public class UserController {
         }
 
     }
-
-    
-
-    @RequestMapping(
-        value="/BuyProperty/{userId}",
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE,
-        method = RequestMethod.POST
-    )
-    public ResponseEntity<Object> addPropertyToUser(@RequestBody Property property, @PathVariable String email) {
-
-        try {
-            User savedUser = userService.addPropertyToUser(property, email);
-            return new ResponseEntity<Object>(savedUser, HttpStatus.OK);
-        } catch (Exception e) {
-            System.out.println(e);
-            return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Error e) {
-            System.out.println(e);
-            return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
-    
-    @RequestMapping(
-            value="/AddProperty/{userId}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            method = RequestMethod.POST
-        )
-        public ResponseEntity<Object> addListing(@RequestBody Property property, @PathVariable String email) {
-
-            try {
-                User savedUser = userService.addPropertyToUser(property,email);
-                return new ResponseEntity<Object>(savedUser, HttpStatus.OK);
-            } catch (Exception e) {
-                System.out.println(e);
-                return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
-            } catch (Error e) {
-                System.out.println(e);
-                return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-
-        }
 
 	
 }

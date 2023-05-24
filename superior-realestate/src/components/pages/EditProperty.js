@@ -14,7 +14,7 @@ function EditProperty(props) {
   let [photoNum, setPhotoNum] = useState(0);
   const [newPhoto, setNewPhoto]=useState();
   let [photoCount,setPhotoCount] = useState(0);
-  const[responseProperty,setResponseProperty]=useState(0)
+  const[responseProperty,setResponseProperty]=useState(editProperty)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,7 +43,11 @@ function EditProperty(props) {
 
   const changeHandler = (event) => {
     const name = event.target.name;
-    const value = event.target.value;
+    let value;
+    if (event.target.type === "checkbox") {
+        value = event.target.checked;
+
+    } else {value = event.target.value;}
     const tempProperty = { ...property};
     tempProperty[name] = value;
     setEditProperty(tempProperty)
@@ -106,12 +110,13 @@ function EditProperty(props) {
 
   const handleUpdateClick = (event) => {
     event.preventDefault();
+    console.log(editProperty)
     axios
-      .post("http://localhost:8080/property/updateProperty", editProperty)
+      .post("http://localhost:8080/property/UpdateProperty",editProperty)
       .then((response) => {
 
         setResponseProperty(response.data);
-        navigate("/Admin")
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error);
@@ -123,13 +128,13 @@ function EditProperty(props) {
   return (
 <div className='page'>
   <div className='picture-col'>
-    <div className ='picture-row'>
+    <div className ='picture-row center'>
      <img className = 'picture-box' src={photo.imageLocation} alt = {"photo.imageLocation"} />
     </div>
         <div className = 'buttons-row'>
-          <button onClick={deletePhotoClick}>DELETE</button>
-          <button onClick={nextPhotoClick}>NEXT</button>
-          <button onClick={prevPhotoClick}>PREVIOUS</button>
+          <button className = 'button center' onClick={deletePhotoClick}>DELETE</button>
+          <button className = 'button center'onClick={nextPhotoClick}>NEXT</button>
+          <button className = 'button center'onClick={prevPhotoClick}>PREVIOUS</button>
         </div>
     </div>
     <div className='data-col'>
@@ -139,15 +144,19 @@ function EditProperty(props) {
     </div>
     <div className='content-row right'>
     Bedrooms
-      <input className = 'input-container center'  value={editProperty.bedrooms} name='bedrooms' type='bedrooms' onChange={changeHandler} ></input>
+      <input className = 'input-container center'  value={editProperty.bedrooms} name='bedrooms' type="number" onChange={changeHandler} ></input>
     </div>
     <div className='content-row right'>
     Bathrooms
-      <input className = 'input-container center'  value={editProperty.bathrooms} name='bathrooms' type='bathrooms' onChange={changeHandler} ></input>
+      <input className = 'input-container center'  value={editProperty.bathrooms} name='bathrooms' type="number" step={0.5} onChange={changeHandler} ></input>
     </div>
     <div className='content-row right'>
     Acres
-      <input className = 'input-container center'  value={editProperty.acres} name='acres' type='acres' onChange={changeHandler} ></input>
+      <input className = 'input-container center'  value={editProperty.acres} name='acres' type="number" step={0.01} onChange={changeHandler} ></input>
+    </div>
+    <div className='content-row right'>
+    Square Ft
+      <input className = 'input-container center'  value={editProperty.sqFoot} name='sqFoot' type="number" step={0.5} onChange={changeHandler} ></input>
     </div>
     <div className='content-row right'>
     Address
@@ -163,23 +172,27 @@ function EditProperty(props) {
     </div>
     <div className='content-row right'>
     Zip
-      <input className = 'input-container center'  value={editProperty.zip} name='zip' type='Integer' onChange={changeHandler} ></input>
+      <input className = 'input-container center'  value={editProperty.zip} name='zip' type="number" onChange={changeHandler} ></input>
     </div>
 
     <div className='content-row right'>
     Price
-      <input className = 'input-container center' value={editProperty.price} name='price' type='price' onChange={changeHandler} ></input>
+      <input className = 'input-container center' value={editProperty.price} name='price' type="number" step={0.01} onChange={changeHandler} ></input>
+    </div>
+    <div className='content-row right'>
+    Sold
+      <input className = 'input-container center' value={editProperty.isSold} name='isSold' type="checkbox" onChange={changeHandler} ></input>
     </div>
     <div className='content-row right'>
     ENTER: DATE ADDED: EX: 2023-12-03
-      <input className = 'input-container center' value={editProperty.dateAdded} name='dateAdded' type='dateAdded' onChange={changeHandler} ></input>
+      <input className = 'input-container center' value={editProperty.listDate} name='listDate' type="date" onChange={changeHandler} ></input>
     </div>
     <div>
         <button className= 'button center' onClick={handleUpdateClick}>UPDATE</button>
         </div>
         <div className='flex-row center'>
         ADD PHOTO URL:
-        <input className = 'input-container' name='imageLocation' type='imageLocation' onChange={photoChangeHandler}></input>
+        <input className = 'input-container' name='imageLocation' type="url" onChange={photoChangeHandler}></input>
         </div>
         <div>
         <button className= 'button center' onClick={addPhotoClick}>ADD PHOTO</button>

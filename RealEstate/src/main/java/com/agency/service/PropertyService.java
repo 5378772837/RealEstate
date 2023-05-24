@@ -33,7 +33,7 @@ public class PropertyService {
 	        return propertyRepo.save(property);
         }
 
-        throw new AccountNotFoundException("Account does not exist! id not present");
+        throw new AccountNotFoundException("Property does not exist! id not present");
 	}
     
 	//FIND BY ID
@@ -71,7 +71,7 @@ public class PropertyService {
     	}
     
     //ALL PROPERTIES IN A PRICE RANGE
-    public List<Property> findByPrice(double fromPrice, double toPrice) throws Error {
+    public List<Property> findByPrice(Double fromPrice, Double toPrice) throws Error {
       
    		if(!propertyRepo.findByPrice(fromPrice,toPrice).isEmpty()) {
    			return propertyRepo.findByPrice(fromPrice,toPrice);
@@ -80,6 +80,18 @@ public class PropertyService {
    		throw new Error("No properties listed in that price range");
         
     	}
+    
+  //ALL PROPERTIES IN A BY SQUARE FT
+    public List<Property> findBySqFt(Double fromSqFt, Double toSqFt) throws Error {
+      
+   		if(!propertyRepo.findBySqFt(fromSqFt,toSqFt).isEmpty()) {
+   			return propertyRepo.findBySqFt(fromSqFt,toSqFt);
+   		}
+        
+   		throw new Error("No properties listed in that square foot range");
+        
+    	}
+    
     
     //A LIST OF ALL PROPERTIES
 	public List<Property> findAll() {
@@ -96,8 +108,15 @@ public class PropertyService {
 		List<Property> properties = propertyRepo.findPropertiesInInvetory();
 		for(Property p: properties) {
 			p.setDiscount();
+			propertyRepo.save(p);
 			p.getDiscount();
 			}
+		return properties;
+
+	}
+	public List<Property> findAgentProperties(Integer id) {
+		
+		List<Property> properties = propertyRepo.findAgentProperties(id);
 		return properties;
 
 	}

@@ -1,5 +1,6 @@
 package com.agency.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,11 +44,11 @@ public class PropertyController {
           produces = MediaType.APPLICATION_JSON_VALUE,
           method = RequestMethod.POST
       )
-      public ResponseEntity<Object> addProperty(@RequestBody Property property, @PathVariable String email) {
-	  		System.out.println(email+" "+ property);
+      public ResponseEntity<Object> addProperty(@RequestBody Property listing, @PathVariable String email) {
+
           try {
-              userService.addListingToUser(email,property);
-              return new ResponseEntity<Object>(property, HttpStatus.OK);
+              userService.addListingToUser(listing,email);
+              return new ResponseEntity<Object>(listing, HttpStatus.OK);
           } catch (Exception e) {
               System.out.println(e);
               return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -118,9 +119,10 @@ public class PropertyController {
           method = RequestMethod.POST
       )
       public ResponseEntity<Object> updateProperty (@RequestBody Property property) {
+	  System.out.println(property);
 
           try {
-             
+        	  propertyService.update(property);
               return new ResponseEntity<Object>(property, HttpStatus.OK);
           } catch (Exception e) {
               System.out.println(e);
@@ -131,6 +133,26 @@ public class PropertyController {
           }
 
       }
+  @RequestMapping(
+          value="/Purchase/{email}",
+          consumes = MediaType.APPLICATION_JSON_VALUE,
+          produces = MediaType.APPLICATION_JSON_VALUE,
+          method = RequestMethod.POST
+      )
+  	public ResponseEntity<Object> purchaseProperty(@RequestBody Property property, @PathVariable String email) {
+    
+	  try {
+        userService.addPropertyToUser(property,email);
+        return new ResponseEntity<Object>(property, HttpStatus.OK);
+    } catch (Exception e) {
+        System.out.println(e);
+        return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    } catch (Error e) {
+        System.out.println(e);
+        return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+}
 
   
   @RequestMapping(
@@ -161,9 +183,8 @@ public class PropertyController {
       method = RequestMethod.GET
   )
   public ResponseEntity<Object> findPropertyByCity(@PathVariable String city) {
-
       try {
-          List <Property> foundProperty = propertyService.findByCity(city);
+          List <Property> foundProperty = propertyService.findByCity("%"+city+"%");
           return new ResponseEntity<Object>(foundProperty, HttpStatus.OK);
       } catch (Exception e) {
           System.out.println(e);
@@ -183,7 +204,7 @@ public class PropertyController {
 	  public ResponseEntity<Object> findPropertyByState(@PathVariable String state) {
 
 	      try {
-	          List <Property> foundProperty = propertyService.findByState(state);
+	          List <Property> foundProperty = propertyService.findByState("%"+state+"%");
 	          return new ResponseEntity<Object>(foundProperty, HttpStatus.OK);
 	      } catch (Exception e) {
 	          System.out.println(e);
@@ -197,6 +218,7 @@ public class PropertyController {
 
   @RequestMapping(
       value="/findAll",
+      produces = MediaType.APPLICATION_JSON_VALUE,
       method = RequestMethod.GET
   )
   public ResponseEntity<Object> findAll() {
@@ -216,12 +238,31 @@ public class PropertyController {
   
   @RequestMapping(
 	      value="/findPropertiesInInventory",
+	      produces = MediaType.APPLICATION_JSON_VALUE,
 	      method = RequestMethod.GET
 	  )
 	  public ResponseEntity<Object> findPropertiesInInventory() {
 
 	      try {
-	          List<Property> inventoryProperties = propertyService.findAll();
+	          List<Property> inventoryProperties = propertyService.findPropertiesInInventory();
+	          return new ResponseEntity<Object>(inventoryProperties, HttpStatus.OK);
+	      } catch (Exception e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	      } catch (Error e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+	      }
+
+	  }
+  @RequestMapping(
+	      value="/findAgentProperties/{id}",
+	      produces = MediaType.APPLICATION_JSON_VALUE,
+	      method = RequestMethod.GET
+	  )
+	  public ResponseEntity<Object> findAgentProperties(@PathVariable Integer id) {
+	      try {
+	          List<Property> inventoryProperties = propertyService.findAgentProperties(id);
 	          return new ResponseEntity<Object>(inventoryProperties, HttpStatus.OK);
 	      } catch (Exception e) {
 	          System.out.println(e);
@@ -251,6 +292,45 @@ public class PropertyController {
       }
 
   }
+  
+  @RequestMapping(
+	      value="/findByPrice/{fromPrice}/{toPrice}",
+	      produces = MediaType.APPLICATION_JSON_VALUE,
+	      method = RequestMethod.GET
+	  )
+	  public ResponseEntity<Object> findPropertiesByPrice(@PathVariable Double fromPrice, @PathVariable Double toPrice) {
+			
+	      try {
+	          List<Property> propertiesInRange = propertyService.findByPrice(fromPrice, toPrice);
+	          return new ResponseEntity<Object>(propertiesInRange, HttpStatus.OK);
+	      } catch (Exception e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	      } catch (Error e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+	      }
+
+	  }
+  @RequestMapping(
+	      value="/findBySqFt/{fromSqFt}/{toSqFt}",
+	      produces = MediaType.APPLICATION_JSON_VALUE,
+	      method = RequestMethod.GET
+	  )
+	  public ResponseEntity<Object> findPropertiesBySqFt(@PathVariable Double fromSqFt, @PathVariable Double toSqFt) {
+			
+	      try {
+	          List<Property> propertiesInRange = propertyService.findBySqFt(fromSqFt, toSqFt);
+	          return new ResponseEntity<Object>(propertiesInRange, HttpStatus.OK);
+	      } catch (Exception e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
+	      } catch (Error e) {
+	          System.out.println(e);
+	          return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+	      }
+
+	  }
 
 	
 	

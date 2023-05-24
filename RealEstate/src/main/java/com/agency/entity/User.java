@@ -48,7 +48,7 @@ public class User {
 	public User() {}
 	
 	
-    public boolean isAgent() {
+    public boolean getIsAgent() {
 		return isAgent;
 	}
 

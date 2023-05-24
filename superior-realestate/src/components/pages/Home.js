@@ -9,10 +9,11 @@ function Home(props) {
   return (
     
     <div className='flex-col fill center'>
- 
-      <h2 className='flex-row justify-content-center'>Welcome to Superior RealEstate!</h2>
-      <h3 className='flex-row justify-content-center'>Let us help you find the home you have always dreamed of! Your future starts now!</h3>
-
+      <div className='message-col justify-content-center'>
+        <h1 className='flex-row center'>Welcome to Superior RealEstate!</h1>
+        <h2 className='flex-row center'>Let us help you find the home you have always dreamed of! Your future starts now!</h2>
+      </div>
+      <div className='body-row'></div>
 
     </div>
 

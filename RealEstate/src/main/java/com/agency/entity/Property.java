@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 //Annotate Objects with Entity, lets project know its a Object from the DB
@@ -35,6 +36,9 @@ public class Property{
 	
 	@Column(name="bathrooms")
 	private Integer bathrooms;
+	
+	@Column(name="sq_foot")
+	private Integer sqFoot;
 	
 	@Column(name="acres")
 	private Double acres;
@@ -73,9 +77,26 @@ public class Property{
 	@JoinColumn(name="property_Id",referencedColumnName="id")
 	private List<Photo> propertyPhotos=new ArrayList<>();
 	
+	
 	public Property(){
 	}
-	
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public void setIsSold(Boolean isSold) {
+		this.isSold = isSold;
+	}
+
+	public void setSalePrice(Double salePrice) {
+		this.salePrice = salePrice;
+	}
+
+	public void setDiscount(Double discount) {
+		this.discount = discount;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -122,10 +143,6 @@ public class Property{
 
 	public void setDateSold(LocalDate dateSold) {
 		this.dateSold = dateSold;
-	}
-
-	public void setDiscount(double discount) {
-		this.discount = discount;
 	}
 
 	public void setPropertyPhotos(List<Photo> propertyPhotos) {
@@ -176,14 +193,17 @@ public class Property{
 		this.price = price;
 	}
 	
-	public void setListDate(LocalDate date) throws ParseException{
-		
+	public LocalDate getListDate(){
+		return listDate;
 	}
-	public boolean isSold() {
+	public void setListDate(LocalDate date) throws ParseException{
+	this.listDate=date;	
+	}
+	public boolean getIsSold() {
 		return isSold;
 	}
 
-	public void setSold(boolean isSold) {
+	public void setIsSold(boolean isSold) {
 		this.isSold = isSold;
 	}
 
@@ -198,9 +218,6 @@ public class Property{
 		this.propertyPhotos.remove(photo);
 	}
 
-	public LocalDate getListDate(){
-		return listDate;
-	}
 	public void setDiscount() {
 		LocalDate today = LocalDate.now();
 		long diff = ChronoUnit.DAYS.between(this.getListDate(), today);
@@ -209,4 +226,25 @@ public class Property{
 	public double getDiscount() {
 		return this.discount;
 	}
+	
+	public Integer getSqFoot() {
+		return sqFoot;
+	}
+
+	public void setSqFoot(Integer sqFoot) {
+		this.sqFoot = sqFoot;
+	}
+
+	@Override
+	public String toString() {
+		return "Property [id=" + id + ", description=" + description + ", bedrooms=" + bedrooms + ", bathrooms="
+				+ bathrooms + ", sqFoot=" + sqFoot + ", acres=" + acres + ", stAddress=" + stAddress + ", city=" + city
+				+ ", state=" + state + ", zip=" + zip + ", price=" + price + ", isSold=" + isSold + ", salePrice="
+				+ salePrice + ", listDate=" + listDate + ", dateSold=" + dateSold + ", discount=" + discount
+				+ ", propertyPhotos=" + propertyPhotos + "]";
+	}
+
+
+
+	
 }

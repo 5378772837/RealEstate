@@ -19,10 +19,16 @@ public interface PropertyRepo extends JpaRepository<Property, Integer> {
     @Query(value="select * from property where is_sold = 0 AND state LIKE ?1", nativeQuery = true)
     public List<Property> findByState(String state);
      
-    @Query(value="select * from property where where is_sold = 0 AND price BETWEEN ?1 AND ?2;", nativeQuery = true)
-    public List<Property> findByPrice(double fromPrice, double toPrice);
+    @Query(value="select * from property where is_sold = 0 AND price BETWEEN ?1 AND ?2", nativeQuery = true)
+    public List<Property> findByPrice(Double fromPrice, Double toPrice);
+    
+    @Query(value="select * from property where is_sold = 0 AND sq_foot BETWEEN ?1 AND ?2", nativeQuery = true)
+    public List<Property> findBySqFt(Double fromSqFt, Double toSqFt);
     
     @Query(value="select * from property where is_sold = 0", nativeQuery = true)
     public List<Property> findPropertiesInInvetory();
+    
+    @Query(value="select * from property where agent_id = ?1 ", nativeQuery = true)
+    public List<Property> findAgentProperties(Integer id);
 	
 }
