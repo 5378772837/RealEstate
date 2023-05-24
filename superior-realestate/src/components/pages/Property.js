@@ -115,7 +115,10 @@ const handleBuySubmit = () =>{
     </div>
 
     <div className='content-row center'>
-    <b>Price: &nbsp; </b>{selectedProperty.price}
+    <b>Price: &nbsp; $</b>{selectedProperty.price}
+    </div>
+    <div className='content-row center'>
+    <h3>CASH BACK DISCOUNT&nbsp; $</h3>{selectedProperty.discount}
     </div>
     <div className='content-row center'>
     <b>DATE ADDED: &nbsp;</b>{selectedProperty.listDate}
